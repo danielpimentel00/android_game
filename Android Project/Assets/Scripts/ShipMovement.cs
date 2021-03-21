@@ -5,8 +5,8 @@ using UnityEngine;
 public class ShipMovement : MonoBehaviour
 {
     float moveSpeed = 0.12f;
-    public float topLimit = 4.1f;
-    public float bottomLimit = -4.5f;
+    private float topLimit = 4.2f;
+    private float bottomLimit = -4.3f;
 
     void Update()
     {
