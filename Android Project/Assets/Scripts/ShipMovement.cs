@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class ShipMovement : MonoBehaviour
 {
-    float moveSpeed = 0.12f;
-    private float topLimit = 4.2f;
-    private float bottomLimit = -4.3f;
+    private float moveSpeed = 0.12f;
+    private bool canMove = true;
+
 
     void Update()
     {
-        
+        if (GameController.gameOver)
+        {
+            canMove = false;
+        }
+        else
+        {
+            canMove = true;
+        }
     }
 
     private void FixedUpdate()
@@ -20,16 +27,18 @@ public class ShipMovement : MonoBehaviour
 
     void MoveUpDown()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.touchCount > 0)
         {
-            Vector3 touchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Touch touch = Input.GetTouch(0);
 
-            if(touchPos.y > 0 && touchPos.x > 1 && gameObject.transform.position.y < topLimit)
+            Vector3 touchPos = Camera.main.ScreenToWorldPoint(touch.position);
+
+            if(touchPos.y > 0 && touchPos.x > 1 && !Boundaries.topLimit && canMove)
             {
                 //move up
                 transform.Translate(0, moveSpeed, 0);
             }
-            else if(touchPos.y < 0 && touchPos.x > 1 && gameObject.transform.position.y > bottomLimit)
+            else if(touchPos.y < 0 && touchPos.x > 1 && !Boundaries.bottomLimit && canMove)
             {
                 //move down
                 transform.Translate(0, -moveSpeed, 0);
