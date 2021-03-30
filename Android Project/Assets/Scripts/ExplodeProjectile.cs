@@ -6,7 +6,7 @@ public class ExplodeProjectile : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "balloon")
+        if (collision.gameObject.tag == "balloon" || collision.gameObject.tag == "blueballoon")
         {
             Destroy(gameObject);
         }

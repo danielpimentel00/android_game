@@ -19,11 +19,10 @@ public class Timer : MonoBehaviour
         string minutes = ((int)t / 60).ToString();
         string seconds = (t % 60).ToString("f0");
 
-        if(t % 60 < 10)
+        if(t % 60 < 9.5f)
         {
             gameObject.GetComponent<Text>().text = minutes + ":0" + seconds;
-        }
-        else
+        }else
         {
             gameObject.GetComponent<Text>().text = minutes + ":" + seconds;
         }

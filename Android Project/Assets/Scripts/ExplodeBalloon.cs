@@ -9,6 +9,12 @@ public class ExplodeBalloon : MonoBehaviour
         if(collision.gameObject.tag == "projectile")
         {
             Destroy(gameObject);
+            SoundManager.PlaySound("explosion_08");
+
+            if (gameObject.tag == "blueballoon")
+                HeliumController.heliumLevel += 10;
+            else
+                HeliumController.heliumLevel += 1;
         }
     }
 }

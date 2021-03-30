@@ -8,4 +8,9 @@ public class DestroyBalloon : MonoBehaviour
     {
         Destroy(gameObject, 2);
     }
+
+    private void Update()
+    {
+        
+    }
 }

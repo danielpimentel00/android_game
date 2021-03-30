@@ -6,6 +6,7 @@ TagManager:
   tags:
   - balloon
   - projectile
+  - blueballoon
   layers:
   - Default
   - TransparentFX
