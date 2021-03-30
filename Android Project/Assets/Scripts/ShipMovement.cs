@@ -45,4 +45,26 @@ public class ShipMovement : MonoBehaviour
             }
         }
     }
+
+    //funcion para probar en la pc
+    /*void MoveUpDown2()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            Input input = Input.Get;
+
+            Vector3 touchPos = Camera.main.ScreenToWorldPoint(touch.position);
+
+            if (touchPos.y > 0 && touchPos.x > 1 && !Boundaries.topLimit && canMove)
+            {
+                //move up
+                transform.Translate(0, moveSpeed, 0);
+            }
+            else if (touchPos.y < 0 && touchPos.x > 1 && !Boundaries.bottomLimit && canMove)
+            {
+                //move down
+                transform.Translate(0, -moveSpeed, 0);
+            }
+        }
+    }*/
 }

@@ -8,119 +8,32 @@ using TMPro;
 
 public class GenerateBalloons : MonoBehaviour
 {
+    public Rigidbody2D[] balloons;
+    public Transform balloonSpawner;
 
-    [SerializeField]
-    TextMeshProUGUI killedText;
+    private float[] spawnTime = {  1, 1.1f, 1.2f, 1.3f, 1.4f, 1.5f };
 
-    [SerializeField]
-    TextMeshProUGUI leackedText;
-
-    [SerializeField]
-    TextMeshProUGUI gameOverText;
-
-    [SerializeField]
-    GameObject balloonPrefab;
-
-    [HideInInspector]
-    public int killedCount;
-
-    [HideInInspector]
-    public int leackedCount;
-
-    float spawnDelay = 0.5f;
-
-    float velocity = 80f;
-
-    bool gameIsOver = false;
-
-    public bool isOnMenu = false;
-
-    int maxHP = 10;
-
-    int curHP;
-
-    Rigidbody2D rb;
-
-    // Start is called before the first frame update
     void Start()
     {
-        curHP = maxHP;
-        StartCoroutine(Spawn());
+        StartCoroutine("CreateBalloon");
     }
 
-    public Sprite[] destrSp;
-    
-    IEnumerator Spawn()
+    IEnumerator CreateBalloon()
     {
-        SpawnBalloon();
-        yield return new WaitForSeconds(spawnDelay);
-            StartCoroutine(Spawn());
-        yield return null;
-    }
+        int randomSpawn = Random.Range(0, 6);
+        yield return new WaitForSeconds(spawnTime[randomSpawn]);
 
-    void SpawnBalloon()
-    {
-        Vector2 spawnPosition = new Vector2(Screen.width * Random.Range(0.1f, 0.9f), -200f);
-        GameObject obj = Instantiate(balloonPrefab, spawnPosition, transform.rotation, transform);
-        rb = obj.GetComponent<Rigidbody2D>();
-        rb.velocity = new Vector2(0f, velocity);
-        velocity *= 1.001f;
-        spawnDelay *= 0.999f;
-    }
-
-    void GameExit()
-    {
-        Application.Quit();
-    }
-
-    void RestartGame()
-    {
-        Time.timeScale = 1.0f;
-        SceneManager.LoadScene(0);
-    }
-
-    public void ShowKilledText()
-    {
-        killedText.text = "killed: " + killedCount;
-    }
-
-    [SerializeField]
-    GameObject menuObj;
-
-    public void ShowLeackdText()
-    {
-        leackedText.text = "leacked: " + leackedCount;
-        curHP--;
-        if(curHP == 0) 
+        while (true)
         {
-            gameIsOver = true;
-            menuObj.SetActive(true);
-            Time.timeScale = 0;
+            Rigidbody2D BalloonInstance;
+            int randomNum = Random.Range(0, 7);
+
+            BalloonInstance = Instantiate(balloons[randomNum], balloonSpawner.position, balloonSpawner.rotation) as Rigidbody2D;
+            //BalloonInstance.AddForce(-balloonSpawner.right * 750f);
+
+            randomSpawn = Random.Range(0, 6);
+            yield return new WaitForSeconds(spawnTime[randomSpawn]);
         }
+
     }
-
-    public void StartMenu() 
-    {
-        if(gameIsOver) return;
-        if(!isOnMenu) 
-        {
-            menuObj.SetActive(true);
-            isOnMenu = true;
-            Time.timeScale = 0.0f;
-        }
-        else
-        {
-            menuObj.SetActive(false);
-            Time.timeScale = 1.0f;
-            isOnMenu = false;
-        }
-    }
-
-
-
-    // Update is called once per frame
-    // void Update()
-    // {
-        
-    // }
 }
