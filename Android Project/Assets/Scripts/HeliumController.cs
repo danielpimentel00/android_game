@@ -22,7 +22,7 @@ public class HeliumController : MonoBehaviour
         {
             GameController.gameOver = true;
         }
-        else if (heliumLevel >= 500)
+        else if (heliumLevel >= 100)
         {
             GameController.won = true;
         }
