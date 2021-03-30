@@ -23,7 +23,6 @@ public class ShipMovement : MonoBehaviour
     private void FixedUpdate()
     {
         MoveUpDown();
-        MoveUpDownPc();
     }
 
     void MoveUpDown()
@@ -47,23 +46,5 @@ public class ShipMovement : MonoBehaviour
         }
     }
 
-    //funcion para probar en la pc
-    void MoveUpDownPc()
-    {
-        if (Input.GetMouseButton(0))
-        {
-            Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-            if (mousePos.y > 0 && mousePos.x > 1 && !Boundaries.topLimit && canMove)
-            {
-                //move up
-                transform.Translate(0, moveSpeed, 0);
-            }
-            else if (mousePos.y < 0 && mousePos.x > 1 && !Boundaries.bottomLimit && canMove)
-            {
-                //move down
-                transform.Translate(0, -moveSpeed, 0);
-            }
-        }
-    }
+    
 }
